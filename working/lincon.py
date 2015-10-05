@@ -1,7 +1,8 @@
 # IPython script for the solution of the linear convection equation using
 # finite differences.
 
-import numpy                       
+import numpy  
+import math                     
 from matplotlib import pyplot    
 from matplotlib import rcParams
 rcParams['font.family'] = 'serif'
@@ -13,7 +14,8 @@ def linearconv(nx,tt):
     Solves the equation d_t u + c d_x u = 0 where 
     * the wavespeed c is set to 1
     * the domain is x \in [0, 2]
-    * 20 timesteps are taken, with \Delta t computed using the CFL 0.5
+    * The total time step is givem and the number of steps is adjusted 
+      accordingly to the  \Delta t computed using the CFL 0.5
     * the initial data is the hat function
     
     Produces a plot of the results
@@ -24,7 +26,7 @@ def linearconv(nx,tt):
     nx : integer
         number of internal grid points
     tt : float
-		total time interval of simulation
+        total time interval of simulation
 		
     Returns
     -------
@@ -32,12 +34,15 @@ def linearconv(nx,tt):
     None : none
     """
     dx = 2/(nx-1)
-    nt = 25    
     c = 1
-    sigma = .5
+    sigma = 0.5 # sigma <=1.0, quanto mais próximo do maximo 1.0, observei 
+                # menor dissipacao numerica. Menor numero de iteracoes?
     x = numpy.linspace(0,2,nx)
     
     dt = sigma*dx/c
+    nt = int(math.floor(tt/dt)) # Calcula o numero de passos para dar o mesmo 
+                                # tempo total
+    print(nt)
 
     u = numpy.ones(nx) 
     lbound = numpy.where(x >= 0.5)
@@ -56,6 +61,6 @@ def linearconv(nx,tt):
     pyplot.show()
 
 # Teste
-linearconv(101)
+linearconv(101,0.5)
 
 
