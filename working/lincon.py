@@ -7,7 +7,7 @@ from matplotlib import rcParams
 rcParams['font.family'] = 'serif'
 rcParams['font.size'] = 16
 
-def linearconv(nx):
+def linearconv(nx,tt):
     """Solve the linear convection equation.
     
     Solves the equation d_t u + c d_x u = 0 where 
@@ -23,7 +23,9 @@ def linearconv(nx):
     
     nx : integer
         number of internal grid points
-        
+    tt : float
+		total time interval of simulation
+		
     Returns
     -------
     
@@ -35,7 +37,7 @@ def linearconv(nx):
     sigma = .5
     x = numpy.linspace(0,2,nx)
     
-    dt = sigma*dx
+    dt = sigma*dx/c
 
     u = numpy.ones(nx) 
     lbound = numpy.where(x >= 0.5)
