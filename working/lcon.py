@@ -1,6 +1,6 @@
 import numpy  
 
-def BFDResidual(c, dx, u)
+def BFDResidual(c, dx, u):
     """Computes the residual of the 1-D linear convection equation
     spatially discretized by backward finite differences.
     
@@ -23,7 +23,7 @@ def BFDResidual(c, dx, u)
     return -c/dx*(u[1:] -u[:-1])
 
 
-def DuBFDResidual(c, dx, u)
+def DuBFDResidual(c, dx, u):
     """Computes the Jacobian (residual derivative relative to state
     variables) of the 1-D linear convection equation spatially
     discretized by backward finite differences.
