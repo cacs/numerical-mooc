@@ -18,7 +18,7 @@ def BFDResidual(dx, u):
     Res : array
         Array with the residual
     """
-    return -u[1:]/dx*(u[1:] -u[:-1])
+    return (-u[1:]/dx)*(u[1:] -u[:-1])
 
 
 def DuBFDResidual(dx, u):
@@ -46,6 +46,5 @@ def DuBFDResidual(dx, u):
     DR[i, i] = 2*u[1:-1]-u[:-2]
     DR[i[1:],i[:-1]] = -u[2:-1]
     
-
-    return DR
+    return (-1./dx)*DR
  
